@@ -1,0 +1,88 @@
+<head>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
+<link href='style.css' rel='stylesheet' type='text/css'>
+<title>Boo Challenge Results</title>
+<link rel="icon" type="x-icon" href="icon.png">
+<link rel="shortcut icon" type="x-icon" href="icon.png">
+<meta charset="utf-8">
+<script>
+  version = "Test Edition #1" //Remember to update this before making changes to the test itself!
+</script>
+</head>
+
+
+<body>
+<h2>Boo Challenge Result</h2>
+<hr>
+
+<h3>These are the features that matter to you in order of importance!</h3>
+
+<h3>1st: <span class="weight-300" id="titlehighest"></span></h3>
+<div class="axis">
+    <div class="bar equality" id="bar-equality">
+        <div class="text-wrapper" id="highest"></div>
+    </div>
+</div>
+<h3>2nd: <span class="weight-300" id="titlehigher"></span></h3>
+<div class="axis">
+    <div class="bar might" id="bar-equality">
+        <div class="text-wrapper" id="higher"></div>
+    </div>
+</div>
+<h3>3rd: <span class="weight-300" id="titlemedium"></span></h3>
+<div class="axis">
+    <div class="bar authority" id="bar-equality">
+        <div class="text-wrapper" id="medium"></div>
+    </div>
+</div>
+<h3>4th: <span class="weight-300" id="titlelow"></span></h3>
+<div class="axis">
+    <div class="bar peace" id="bar-higher">
+        <div class="text-wrapper" id="low"></div>
+    </div>
+</div>
+<h3>5th: <span class="weight-300" id="titlelower"></span></h3>
+<div class="axis">
+    <div class="bar progress" id="bar-equality">
+        <div class="text-wrapper" id="lower"></div>
+    </div>
+</div>
+<br>
+<button class="button" onclick="location.href='index.html';" style="background-color: #2196f3;">Start All Over</button> <br>
+
+<script>
+    function getQueryVariable(variable)
+    {
+           var query = window.location.search.substring(1)
+           var vars = query.split("&")
+           for (var i=0;i<vars.length;i++) {
+                   var pair = vars[i].split("=")
+                   if(pair[0] == variable) {return pair[1]}
+           }
+           return(NaN);
+    }
+
+    function setBarValue(name, value) {
+        // split value
+        const valArr = value.split(',');
+        title = document.getElementById('title'+ name);
+        innerel = document.getElementById(name);
+        title.innerHTML = (valArr[0])
+        innerel.innerHTML = (valArr[1])
+    }
+
+    highest  = getQueryVariable("e")
+    higher  = getQueryVariable("d")
+    medium  = getQueryVariable("c")
+    low  = getQueryVariable("b")
+    lower  = getQueryVariable("a")
+
+
+    setBarValue("highest", highest)
+    setBarValue("higher", higher)
+    setBarValue("medium", medium)
+    setBarValue("low", low)
+    setBarValue("lower", lower)
+    </script>
+    
+</body>

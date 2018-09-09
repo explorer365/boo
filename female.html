@@ -1,0 +1,102 @@
+<head>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
+<link href='style.css' rel='stylesheet' type='text/css'>
+<title>Boo Challenge</title>
+<link rel="icon" type="x-icon" href="icon.png">
+<link rel="shortcut icon" type="x-icon" href="icon.png">
+<meta charset="utf-8">
+</head>
+<body>
+<script type="application/javascript"
+        src="female.js">
+</script>
+<h2>Boo Challenge</h2>
+<hr>
+<h3 style="text-align:center;" id="question-number">Loading...</h3>
+<p class="question" id="question-text"></p>
+<button class="button" id="stronglyAgree" style="background-color: #1b5e20;">Strongly Agree</button> <br>
+<button class="button" id="agree" style="background-color: #4caf50;">Agree</button> <br>
+<button class="button" id="neutral" style="background-color: #bbbbbb;">Neutral/Unsure</button> <br>
+<button class="button" id="disagree" style="background-color: #f44336;">Disagree</button> <br>
+<button class="button" id="stronglyDisagree" style="background-color: #b71c1c;">Strongly Disagree</button> <br>
+
+<!-- JavaScript for the test itself -->
+<script>
+    class Survey {
+        constructor(){
+            this.options = {
+                Physique : 0,
+                Finance : 0,
+                Character : 0,
+                Spiritual : 0,
+                Drive : 0,
+                Sex : 0,
+            };
+            this.highest = []
+        }
+
+        /**
+         * @param {array} x 
+         * @param {array} y 
+         */
+        setOptions(x,y,qn){
+            this.options[x[0]] += x[1];
+            this.options[y[0]] += y[1];
+        }
+        getTheHighest(){
+            // convert to array
+            // loop througth the array and sort
+            const objArr = Object.entries(this.options).sort((a,b)=>{
+                return b[1] - a[1];
+            })
+            // return the top two
+            this.highest.push(objArr[0], objArr[1], objArr[2], objArr[3], objArr[4]) ;
+        }
+        results() {
+        location.href = `results.html`
+            + `?e=${this.highest[0]}`
+            + `&d=${this.highest[1]}`
+            + `&c=${this.highest[2]}`
+            + `&b=${this.highest[3]}`
+            + `&a=${this.highest[4]}`
+        }
+    }
+
+/**
+ * Initialization
+*/
+
+let qn = 0; // Question number
+init_question();
+
+// Initialize questions
+function init_question() {
+    document.getElementById("question-text").innerHTML = questions[qn].question;
+    document.getElementById("question-number").innerHTML = "Question " + (qn + 1) + " of " + (questions.length);
+    qn++;
+}
+
+// Initialize object
+const compile = new Survey;
+
+// get the click
+const nextQuestion = (qnH,arr,comp) =>{
+    const qn = qnH - 1;
+    const variable = questions[qn].variable;
+    compile.setOptions([variable[0],arr[0]],[variable[1],arr[1]],qn);
+
+    if (qnH < questions.length) {
+        init_question();
+    } else {
+        compile.getTheHighest();
+        compile.results();
+    }
+}
+// event listener
+document.querySelector("#stronglyAgree").addEventListener("click", ()=>nextQuestion(qn, [5,0], compile));
+document.querySelector("#agree").addEventListener("click", ()=>nextQuestion(qn, [4,1], compile));
+document.querySelector("#neutral").addEventListener("click", ()=>nextQuestion(qn, [3,2], compile));
+document.querySelector("#disagree").addEventListener("click", ()=>nextQuestion(qn, [1,4], compile));
+document.querySelector("#stronglyDisagree").addEventListener("click", ()=>nextQuestion(qn, [0,5], compile));
+</script>
+</body>
