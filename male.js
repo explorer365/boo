@@ -1,6 +1,26 @@
+ 
+var insertA = ['Willy the Goblin','Big Daddy','Father Christmas', 'fello', 'juicy'];
+var insertB = ['the soup kitchen','Disneyland','the White House'];
+var insertC = ['spontaneously combusted','melted into a puddle on the sidewalk','turned into a slug and crawled away'];
+
+var rand = insertA[Math.floor(Math.random() * insertA.length)];
+
+/* 
+var sup = 
+randomize.addEventListener('click', result);
+
+//function result() {
+    var rand = insertA[Math.floor(Math.random() * insertA.length)];
+    //return rand;
+//}
+*/
+//var x = result();
+
+//I want a woman that has the body of a goddess. So what if she’s broke
+
 questions = [
     {
-        "question": "I want a woman that has the body of a goddess. So what if she’s broke ",
+        "question": rand,
         "variable": ["Physique","Finance"]
     },
     {
