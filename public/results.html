@@ -56,6 +56,7 @@
     <div class="bar progress" id="bar-equality">
         <div class="text-wrapper" id="lower"></div>
     </div>
+
 </div>
 <br>
 <button class="button" onclick="location.href='index.html';" style="background-color: #2196f3;">Start All Over</button> <br>
@@ -95,4 +96,44 @@
     setBarValue("lower", lower)
     </script>
     
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-firestore.js"></script>
+    <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyD0weTRKrTIxs1MgwT-Z9VyReWhFmUIjwU",
+                authDomain: "boo-challenge.firebaseapp.com",
+                databaseURL: "https://boo-challenge.firebaseio.com",
+                projectId: "boo-challenge",
+                storageBucket: "boo-challenge.appspot.com",
+                messagingSenderId: "223115580914"
+            };
+            firebase.initializeApp(config);
+            const db = firebase.firestore();
+            db.settings({timestampsInSnapshots: true});
+        
+            // this appears in a new file
+            db.collection('loob').get().then((snapshot) =>{
+                snapshot.docs.forEach(doc => {
+                    console.log(doc.data())
+                })
+            
+            })
+
+            var addData = {
+                    G: window.localStorage.getItem('gender'),
+                    1: highest,
+                    2: higher,
+                    3: medium,
+                    4: low,
+                    5: lower,
+                    T: new Date(),
+                };
+
+            console.log(addData);
+
+            db.collection('loob').add(addData);
+        
+     window.localStorage.removeItem('gender'); //cleanup
+    </script>
 </body>

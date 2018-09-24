@@ -23,6 +23,27 @@
 <hr>
 <h2 class = "trial"> Instructions </h2>
 <p class="question">Please select your gender</p>
-<button class="button" onclick="location.href='male.html';" style="background-color: #2196f3;">Male</button> <br>
-<button class="button" onclick="location.href='female.html';" style="background-color: #f44336;">Female</button> <br>
+<button class="button" onclick="saveGender('male');" style="background-color: #2196f3;">Male</button> <br>
+<button class="button" onclick="saveGender('female');" style="background-color: #f44336;">Female</button> <br>
+
+<script>
+
+  var saveGender = function(gender){
+    storage = window.localStorage;
+    storage.setItem('gender',gender);
+    switch(gender){
+      case 'male':
+        location.href='male.html';
+        break;
+      case 'female':
+        location.href='female.html';
+        break;
+      default:
+        alert('No gender chosen, please choose a gender.');
+        break;
+    }
+  }
+
+</script>
+
 </body>
